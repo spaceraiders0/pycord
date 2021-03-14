@@ -11,6 +11,7 @@ curses.nocbreak()
 curses.noecho()
 
 last_x = 0 
+last_y = 0
 columns = []
 term_size = shutil.get_terminal_size()
 
@@ -68,7 +69,8 @@ class Column:
     """
 
     def __init__(self, end: int, *windows):
-        global last_x
+        global last_x, last_y
+        last_y = 0
 
         terminal_width = shutil.get_terminal_size().columns
         self.start = last_x
@@ -87,22 +89,65 @@ class Window:
     columns are positioned next to each other.
     """
 
-     
+    def __init__(self, source: list, end: int):
+        global last_x, last_y
+
+        terminal_height = shutil.get_terminal_size().lines
+        self.source = source
+        self.start = last_y
+        self.end = round(get_scale(end, terminal_height))
+        self.relative_end = self.end - self.start
+
+        last_y = self.end
 
 
+    def update(self, window: curses.window):
+        """Empties the window and redraws the information inside of it.
+
+        :param window: the window to update
+        :type window: curses.window
+        """
+
+        for line in range(0, len(self.source)):
+            # Clear this line
+            for column in range(1, self.end):
+                window.addstr(line + 1, column, " ")
+
+            text = self.source[line]
+            window.addstr(line + 1, 1, text)
+ 
+
+# Window sizes are not 100% accurate, but they should do for now.
 my_screen = Screen(
-    Column(100, 1)
+    Column(25,
+        Window(["foo", "bar"], 25),
+        Window([], 50),
+        Window([], 100),
+    ),
+    Column(75,
+        Window([], 50),
+        Window([], 100)
+    ),
+    Column(100,
+        Window([], 100)
+    )
 )
 
 try:
     # Draw Curses windows.
     while True:
-        for index in range(0, len(my_screen.columns)):
-            column: Column = my_screen.columns[index]
-            start, stop = column.start, column.end
-            new_window = curses.newwin(term_size.lines, column.relative_end, 0, start)
-            new_window.border(0, 0, 0, 0)
-            new_window.refresh()
+        for column_index in range(0, len(my_screen.columns)):
+            column: Column = my_screen.columns[column_index]
+            column_start, column_stop = column.start, column.end
+
+            for window_index in range(0, len(column.windows)):
+                window: Window = column.windows[window_index]
+                window_start, window_stop = window.start, window.end
+
+                new_window = curses.newwin(window.relative_end, column.relative_end, window_start, column_start)
+                new_window.border(0, 0, 0, 0)
+                window.update(new_window)
+                new_window.refresh()
 
         time.sleep(1)
 finally:

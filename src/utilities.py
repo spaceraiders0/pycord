@@ -38,6 +38,10 @@ def new_logger(logger_name: str, use_console: bool = False) -> logging.Logger:
 
     destination_path = get_log_file()
     
+    # Make the destination if it does not exist
+    if destination_path.exists() is False:
+        open(destination_path, "w").close()
+
     # Create the new Logger
     new_logger = logging.getLogger(logger_name)
 
