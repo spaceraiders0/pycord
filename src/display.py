@@ -10,7 +10,7 @@ stdscr = curses.initscr()
 curses.nocbreak()
 curses.noecho()
 
-last_start = 0 
+last_x = 0 
 columns = []
 term_size = shutil.get_terminal_size()
 
@@ -68,24 +68,26 @@ class Column:
     """
 
     def __init__(self, end: int, *windows):
-        global last_start
+        global last_x
 
         terminal_width = shutil.get_terminal_size().columns
-        self.start = last_start
+        self.start = last_x
         self.end = round(get_scale(end, terminal_width))
         self.relative_end = self.end - self.start
         self.windows = [*windows]
 
         # This will make the next column start after the previous one.
-        last_start = self.end
+        last_x = self.end
 
 
 class Window:
     """A window is a display source that goes inside of columns. Windows display
-    information from a list. Each entry in a list describes
+    information from a list. Each entry in a list corresponds to a line in the
+    window. Windows are stacked on top of each other vertically, similar to how
+    columns are positioned next to each other.
     """
 
-    pass
+     
 
 
 my_screen = Screen(
