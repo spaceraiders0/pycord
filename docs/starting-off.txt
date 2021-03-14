@@ -1,0 +1,17 @@
+Hello! Thank you for taking the time to read the documentation (or at the very least, this
+specific file) of this Discord client!
+
+To start off, it is important to acknowledge some things. Firstly, the use of this client
+*is* against the Terms of Service that Discord currently has. By using this client, you need
+to be aware of the fact that you **are** putting your account at risk of deletion. I feel that
+this should go without saying, but I am not responsible for your account. Now with that out
+of the way, I will move on to information regarding the client itself.
+
+This client has features rooted in several other command-line applications. It is is heavily
+inspired by Vi/Vim and features like windows are inspired from Cmus. This uses the Curses
+library to draw the user interface. It is designed to be both modular, customizable, and
+intuitive to use. Something special about this client, however, is that it is based off a
+daemon (pycord). This means that you can have the actual server running in the background,
+and pull off magic like running the server in the background, and running it across different
+workspaces if you are using a standalone window manager. Now that the client itself is covered,
+we can move on to how to use it.

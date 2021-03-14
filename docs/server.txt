@@ -1,0 +1,31 @@
+This section will discuss how the actual daemon works. To start, the daemon is the process
+that is actively juggling information, and responding to requests from clients. When the
+daemon is started, it will actively listen on a specific port for requests. These requests
+come from individual clients that display the information sent by the daemon. Each request
+is enqueued into a Queue. This is so each request will eventually be processed, even if it
+hypothetically takes a while to complete. This does, however, allow for the daemon to be
+controlled remotely. This means that to perform certain actions, you have no need to start
+a client, and can instead send requests to the server yourself. You could also use the Client
+interfaces to control it through your own Python script.
+
+The server has various sub-modules that modify how it works. They are the following:
+- workspaces.py
+- settings.py
+- authentication.py
+
+------ Workspaces ------
+Workspaces are essentially a way for you to view multiple discord channels at once.
+Currently, they cannot be used to login to individual users. You browse your various
+workspaces by pressing keys One, through Nine. By default, they do not have a channel
+open. You must select one your self.
+
+------ Settings ------
+Settings are quite self explanatory. This file contains the settings for your client.
+The syntax for the settings is actually quite simple. To set a setting's value, do the
+following:
+
+set setting_name value
+
+------ Authentication ------
+The authentication module handles logging into Discord. It exposes the interfaces used
+by the daemon.

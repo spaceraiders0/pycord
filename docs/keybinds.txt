@@ -1,0 +1,7 @@
+Pycord has several keybindings that you can use, and configure. Many are similar
+to Discord's built in keybindings, however many changes have been made, as this
+is inspired by Vim, which has quite efficient keybinding choices. Since Pycord
+is based off commands, the keybinding you choose simply acts as a shortcut to a
+command you would normally execute in the command-bar.
+
+CTRL-U - Toggle the User display

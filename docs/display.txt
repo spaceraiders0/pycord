@@ -1,0 +1,23 @@
+Pycord has quite an easy to understand display management system. While it is not as
+robust as something like Vim, or Tmux, I do feel that it is at least somewhat intuitive.
+
+Pycord's User Interface is based upon Curses. As such, each window segment is
+handled by using a class. This allows for the sizes and contents of these windows
+to be modified at runtime. However, each window is only redrawn once the ``redraw``
+command has been run. This is done automatically each time something like a new
+message, or window has been resized, though.
+
+Each window can either be in one of two states. Focused, or unfocused. Commands
+that operate on specific windows will operate on the window currently in focus.
+Each window can also draw information from a specific workspace. The current
+workspace is held in a variable, so this is what allows for you to switch between
+workspaces and have it update so quickly.
+
+The entire screen is separated into three columns. Each time the window is redrawn,
+these widths are recalculated. The process is as shown.
+1. First column is created. Since there is no
+
+The screen is separated into three columns. Each column has a width, and each
+column can have as many screens as you wish in them. However, each new screen
+will take up increasingly less height. Screens will, however, take up as much
+space as they can. As such, each window has 
