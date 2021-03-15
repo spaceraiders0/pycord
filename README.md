@@ -19,9 +19,9 @@ folder provided in the root directory of the project. However, there are some th
 ✔️  = Completed
 ✖️  = Incomplete
 
-Allow for windows to be inserted into columns at runtime ✖️
-Setup a method of detecting keyboard input. ✖️
-Load up information from the pycord daemon, and cache it in the client. ✖️
-Implement "modes" similar to Vim. ✖️
-Add a command mode. When launched, it should shift all windows up by 2 lines. ✖️
-Implement a method of resizing windows. Ditching the "columns" might be necessary. ✖️
+Allow for windows to be inserted into columns at runtime ✖️</br>
+Setup a method of detecting keyboard input. ✖️</br>
+Load up information from the pycord daemon, and cache it in the client. ✖️</br>
+Implement "modes" similar to Vim. ✖️</br>
+Add a command mode. When launched, it should shift all windows up by 2 lines. ✖️</br>
+Implement a method of resizing windows. Ditching the "columns" might be necessary. ✖️</br>
